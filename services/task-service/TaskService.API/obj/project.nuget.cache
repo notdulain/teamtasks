@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "YJ5GP0oOgBk=",
+  "success": true,
+  "projectFilePath": "/Users/realdulain/Documents/Projects/teamtasks/services/task-service/TaskService.API/TaskService.API.csproj",
+  "expectedPackageFiles": [
+    "/Users/realdulain/.nuget/packages/microsoft.aspnetcore.openapi/10.0.3/microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "/Users/realdulain/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,114 @@
+# ============================================================
+# .gitignore — teamtasks (ADO.NET Microservices, .NET 8+)
+# ============================================================
+
+# ------------------------------
+# .NET Build Outputs
+# ------------------------------
+[Bb]in/
+[Oo]bj/
+out/
+publish/
+
+# ------------------------------
+# NuGet
+# ------------------------------
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# NuGet restore files (auto-generated, safe to ignore)
+*.nuget.dgspec.json
+*.nuget.g.props
+*.nuget.g.targets
+project.assets.json
+project.nuget.cache
+
+# ------------------------------
+# Solution & Project User Files
+# ------------------------------
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# ------------------------------
+# Visual Studio / Rider / VS Code
+# ------------------------------
+.vs/
+.vscode/
+.idea/
+*.rsuser
+*.ReSharper
+_ReSharperCache/
+
+# ------------------------------
+# Test Results & Coverage
+# ------------------------------
+TestResults/
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+coverage/
+coverage-report/
+
+# ------------------------------
+# Secrets & Environment Config
+# ------------------------------
+# Keep appsettings.json (base config), ignore overrides with secrets
+appsettings.*.local.json
+*.env
+.env
+.env.*
+secrets.json
+local.settings.json
+
+# ------------------------------
+# Database / ADO.NET
+# ------------------------------
+# Local SQL Server / SQLite files
+*.mdf
+*.ldf
+*.db
+*.sqlite
+*.sqlite3
+
+# Migration lock files (keep SQL scripts, ignore runtime locks)
+*.dbmdl
+
+# ------------------------------
+# OS & System Files
+# ------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ------------------------------
+# GitHub Actions
+# ------------------------------
+# Keep workflow YAML files — nothing to ignore here
+# (secrets are managed via GitHub Secrets, not files)
+
+# ------------------------------
+# Logs & Temp
+# ------------------------------
+*.log
+logs/
+tmp/
+temp/

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "KC8Q8fCNgJA=",
+  "success": true,
+  "projectFilePath": "/Users/realdulain/Documents/Projects/teamtasks/services/notification-service/NotificationService.API/NotificationService.API.csproj",
+  "expectedPackageFiles": [
+    "/Users/realdulain/.nuget/packages/microsoft.aspnetcore.openapi/10.0.3/microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "/Users/realdulain/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
