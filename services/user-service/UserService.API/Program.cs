@@ -18,7 +18,7 @@ var connectionString = builder.Configuration.GetConnectionString("UsersDb")!;
 EnsureDatabase.For.SqlDatabase(connectionString);
 var upgrader = DeployChanges.To
     .SqlDatabase(connectionString)
-    .WithScriptsFromEmbeddedInAssembly(Assembly.GetExecutingAssembly())
+    .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
     .LogToConsole()
     .Build();
 upgrader.PerformUpgrade();
