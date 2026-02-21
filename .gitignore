@@ -63,6 +63,7 @@ coverage-report/
 # ------------------------------
 # Keep appsettings.json (base config), ignore overrides with secrets
 appsettings.*.local.json
+appsettings.Development.json
 *.env
 .env
 .env.*
