@@ -30,4 +30,4 @@ app.MapControllers();
 app.Run();
 
 
-//now using direct curl Kudu CD webhook trigger
+//now using basic auth in curl

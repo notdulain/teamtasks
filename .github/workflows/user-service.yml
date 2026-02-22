@@ -61,7 +61,7 @@ jobs:
           PUBLISH_PROFILE='${{ secrets.AZURE_PUBLISH_PROFILE_QA_USER }}'
           USERNAME=$(echo "$PUBLISH_PROFILE" | grep -oP 'userName="\K[^"]+' | head -1)
           PASSWORD=$(echo "$PUBLISH_PROFILE" | grep -oP 'userPWD="\K[^"]+' | head -1)
-          curl -f -X POST "https://${USERNAME}:${PASSWORD}@${{ steps.env.outputs.APP_NAME }}.scm.azurewebsites.net/docker/hook"
+          curl -f -X POST -u "${USERNAME}:${PASSWORD}" "https://${{ steps.env.outputs.APP_NAME }}.scm.azurewebsites.net/docker/hook"
 
       - name: Trigger Azure CD Webhook (Staging)
         if: github.ref == 'refs/heads/main'
@@ -69,4 +69,4 @@ jobs:
           PUBLISH_PROFILE='${{ secrets.AZURE_PUBLISH_PROFILE_STAGING_USER }}'
           USERNAME=$(echo "$PUBLISH_PROFILE" | grep -oP 'userName="\K[^"]+' | head -1)
           PASSWORD=$(echo "$PUBLISH_PROFILE" | grep -oP 'userPWD="\K[^"]+' | head -1)
-          curl -f -X POST "https://${USERNAME}:${PASSWORD}@${{ steps.env.outputs.APP_NAME }}.scm.azurewebsites.net/docker/hook"
+          curl -f -X POST -u "${USERNAME}:${PASSWORD}" "https://${{ steps.env.outputs.APP_NAME }}.scm.azurewebsites.net/docker/hook"
