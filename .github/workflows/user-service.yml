@@ -36,11 +36,11 @@ jobs:
           if [ "${{ github.ref }}" == "refs/heads/develop" ]; then
             echo "TAG=qa" >> $GITHUB_OUTPUT
             echo "APP_NAME=teamtasks-user-service-qa" >> $GITHUB_OUTPUT
-            echo "RESOURCE_GROUP=teamtasks-qa" >> $GITHUB_OUTPUT
+            echo "PUBLISH_PROFILE_SECRET=AZURE_PUBLISH_PROFILE_QA_USER" >> $GITHUB_OUTPUT
           elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
             echo "TAG=staging" >> $GITHUB_OUTPUT
             echo "APP_NAME=teamtasks-user-service-staging" >> $GITHUB_OUTPUT
-            echo "RESOURCE_GROUP=teamtasks-staging" >> $GITHUB_OUTPUT
+            echo "PUBLISH_PROFILE_SECRET=AZURE_PUBLISH_PROFILE_STAGING_USER" >> $GITHUB_OUTPUT
           fi
 
       - name: Login to Docker Hub
@@ -55,17 +55,18 @@ jobs:
             services/user-service/
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/user-service:${{ steps.env.outputs.TAG }}
 
-      - name: Azure Login
-        uses: azure/login@v2
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Deploy container to Azure
+      - name: Trigger Azure CD Webhook (QA)
+        if: github.ref == 'refs/heads/develop'
         run: |
-          az webapp config container set \
-            --name ${{ steps.env.outputs.APP_NAME }} \
-            --resource-group ${{ steps.env.outputs.RESOURCE_GROUP }} \
-            --container-image-name ${{ secrets.DOCKERHUB_USERNAME }}/user-service:${{ steps.env.outputs.TAG }}
-          az webapp restart \
-            --name ${{ steps.env.outputs.APP_NAME }} \
-            --resource-group ${{ steps.env.outputs.RESOURCE_GROUP }}
+          PUBLISH_PROFILE='${{ secrets.AZURE_PUBLISH_PROFILE_QA_USER }}'
+          USERNAME=$(echo "$PUBLISH_PROFILE" | grep -oP 'userName="\K[^"]+' | head -1)
+          PASSWORD=$(echo "$PUBLISH_PROFILE" | grep -oP 'userPWD="\K[^"]+' | head -1)
+          curl -f -X POST "https://${USERNAME}:${PASSWORD}@${{ steps.env.outputs.APP_NAME }}.scm.azurewebsites.net/docker/hook"
+
+      - name: Trigger Azure CD Webhook (Staging)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          PUBLISH_PROFILE='${{ secrets.AZURE_PUBLISH_PROFILE_STAGING_USER }}'
+          USERNAME=$(echo "$PUBLISH_PROFILE" | grep -oP 'userName="\K[^"]+' | head -1)
+          PASSWORD=$(echo "$PUBLISH_PROFILE" | grep -oP 'userPWD="\K[^"]+' | head -1)
+          curl -f -X POST "https://${USERNAME}:${PASSWORD}@${{ steps.env.outputs.APP_NAME }}.scm.azurewebsites.net/docker/hook"
