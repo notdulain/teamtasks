@@ -30,4 +30,4 @@ app.MapControllers();
 app.Run();
 
 
-//using direct az cli
+//now using direct curl Kudu CD webhook trigger
