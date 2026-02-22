@@ -30,5 +30,4 @@ app.MapControllers();
 app.Run();
 
 
-//ignore this
-//testing the CI once again
+//using direct az cli
