@@ -55,7 +55,7 @@ jobs:
 
       - name: Deploy to Azure (QA)
         if: github.ref == 'refs/heads/develop'
-        uses: azure/webapps-deploy@v3
+        uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ steps.env.outputs.APP_NAME }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_QA_TASK }}
@@ -63,7 +63,7 @@ jobs:
 
       - name: Deploy to Azure (Staging)
         if: github.ref == 'refs/heads/main'
-        uses: azure/webapps-deploy@v3
+        uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ steps.env.outputs.APP_NAME }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_STAGING_TASK }}
